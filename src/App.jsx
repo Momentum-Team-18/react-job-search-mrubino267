@@ -1,48 +1,16 @@
-import {useState, useEffect} from 'react'
 import './App.css'
-import axios from 'axios';
+import Categories from './components/Categories.jsx'
+import SearchForm from './components/SearchForm.jsx'
 
 function App() {
-    const [jobDetails, setJobDetails] = useState([]);
-    const APIKEY = "ca24002e0e394a1b22fb1b8e80d2cbb081441be6";
-
-    useEffect(() => {
-        axios
-        .get("https://proxy-findwork-api.glitch.me/api/jobs/", {
-            headers: {
-            Authorization: `Token ${APIKEY}`,
-            "Content-Type": "application/json",
-            },
-        })
-        .then((response) => setJobDetails(response.data.results));
-    }, []);
-    
-    console.log(jobDetails);
-
     return (
         <>
-        <div>
-            {jobDetails.map((job) => (
-            <div key={job.id}>
-                <h2>{job.company_name}</h2>
-                <h3>{job.role}</h3>
-                <h4>
-                {job.employment_type}/{job.date_posted}
-                </h4>
-            </div>
-            ))}
-        </div>
+            <Categories />
+            <SearchForm />
+        
         </>
-    );
-    }
-    
-
-//     return (
-//     <>
-//     <Categories />
-//     </>
-// )
-
+    )
+}
 
 export default App;
 
